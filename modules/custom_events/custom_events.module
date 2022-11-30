@@ -17,8 +17,7 @@ use Drupal\Core\Routing\RouteMatchInterface;
  */
 
 function custom_events_help($route_name, RouteMatchInterface $route_match) {
-
-  switch ($route_name) {
+ switch ($route_name) {
     case 'help.page.custom_events':
       $output = '';
       $output .= '<h3>' . t('About') . '</h3>';
@@ -27,14 +26,5 @@ function custom_events_help($route_name, RouteMatchInterface $route_match) {
     default:
   }
 }
-t
-/**
- * Implements hook_cron().
- *
-*/
-  function hhi_events_cron() {
-   $events_service = \Drupal::service('custom_events.service');
-   $events_service->unpublishOldEvents();
-   $events_service->deleteOldEvents();
- }
+
 
