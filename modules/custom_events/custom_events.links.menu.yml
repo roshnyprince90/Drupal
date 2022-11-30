@@ -1,17 +1,17 @@
-hhi_events.admin_settings_form:
+custom_events.admin_settings_form:
   title: 'Events'
   route_name: custom_events.admin_settings_form
   description: 'Configure settings for Events.'
   parent: system.admin_config_hhi
   weight: 1
-hhi_events.unpublish_events_form:
+custom_events.unpublish_events_form:
   title: 'Unpublish Events'
   route_name: custom_events.unpublish_events_form
   description: 'Unpublish Past Events.'
   menu_name: admin
   parent: admin_toolbar_tools.help
   weight: -8
-hhi_events.delete_events_form:
+custom_events.delete_events_form:
   title: 'Delete Events'
   route_name: custom_events.delete_events_form
   description: 'Delete Inactive Events.'
