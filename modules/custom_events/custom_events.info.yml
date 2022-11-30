@@ -1,0 +1,7 @@
+name: Events
+type: module
+description: Custom module to provide custom events functionality.
+core_version_requirement: ^8 || ^9
+package: Custom
+dependencies:
+  - date_recur

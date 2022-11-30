@@ -1,0 +1,5 @@
+services:
+    custom_events.service:
+        class: Drupal\custom_events\EventsService
+        arguments: ['@config.factory', '@module_handler', '@path.matcher', '@user.private_tempstore', '@session_manager', '@entity.repository', '@database', '@logger.factory']
+  

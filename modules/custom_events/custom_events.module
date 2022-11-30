@@ -1,0 +1,40 @@
+<?php
+
+/**
+ * @file
+ * Contains custom_events.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ *
+ * @param $route_name
+ * @param RouteMatchInterface $route_match
+ *
+ * @return string
+ */
+
+function custom_events_help($route_name, RouteMatchInterface $route_match) {
+
+  switch ($route_name) {
+    case 'help.page.custom_events':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('A module to provide custom events functionality.') . '</p>';
+      return $output;
+    default:
+  }
+}
+t
+/**
+ * Implements hook_cron().
+ *
+*/
+  function hhi_events_cron() {
+   $events_service = \Drupal::service('custom_events.service');
+   $events_service->unpublishOldEvents();
+   $events_service->deleteOldEvents();
+ }
+

@@ -1,0 +1,19 @@
+custom_events.unpublish_events_form:
+  path: '/admin/unpublish_events'
+  defaults:
+    _form: '\Drupal\custom_events\Form\UnpublishEventsForm'
+    _title: 'Unpublish Past Events'
+  requirements:
+    _permission: 'administer site configuration'
+  options:
+    _admin_route: TRUE
+
+custom_events.delete_events_form:
+  path: '/admin/delete_events'
+  defaults:
+    _form: '\Drupal\custom_events\Form\DeleteEventsForm'
+    _title: 'Delete Inactive Events'
+  requirements:
+    _permission: 'administer site configuration'
+  options:
+    _admin_route: TRUE
