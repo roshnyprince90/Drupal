@@ -11,8 +11,11 @@ The Custom Events module is designed to provide custom events functionality. It 
 
 ## Requirements
 Drupal Core: ^8 || ^9
+
 Dependencies:
- date_recur: This module depends on the Date Recur module to handle recurring event functionality.
+
+ date_recur: This module depends on the Date Recur 
+ module to handle recurring event functionality.
 
 
 ## Installation
