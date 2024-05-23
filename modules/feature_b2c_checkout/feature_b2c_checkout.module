@@ -1,0 +1,65 @@
+<?php
+
+/**
+ * Implements hook_page_build().
+ *
+ * This hook injects JavaScript into the page when the user is on the billing page of the checkout process.
+ */
+function feature_b2c_checkout_page_build(&$page) {
+  // Check if the current path is 'b2c/checkout/billing'.
+  if (current_path() == 'b2c/checkout/billing') {
+   
+    // Check if there is an account analytics event stored in the session.
+    if (isset($_SESSION['account_analytics_event'])) {
+      // Inject the JavaScript for the account analytics event.
+      $script = $_SESSION['account_analytics_event'];
+      $page['page_top']['#attached']['js'][] = array(
+        'type' => 'inline',
+        'data' => $script,
+      );
+      // Clear the session variable to avoid duplicate injection.
+      unset($_SESSION['account_analytics_event']);
+    }
+
+    // Check if there is a newsletter analytics event stored in the session.
+    if (isset($_SESSION['newsletter_analytics_event'])) {
+      // Inject the JavaScript for the newsletter analytics event.
+      $script2 = $_SESSION['newsletter_analytics_event'];
+      $page['page_top']['#attached']['js'][] = array(
+        'type' => 'inline',
+        'data' => $script2,
+      );
+      // Clear the session variable to avoid duplicate injection.
+      unset($_SESSION['newsletter_analytics_event']);
+    }
+  }
+}
+
+/**
+ * Generates JavaScript for analytics events.
+ *
+ * This function generates a script that pushes a data layer event to Google Tag Manager.
+ *
+ * @param string $arg
+ *   The type of form being submitted (e.g., 'account', 'newsletter').
+ *
+ * @return string
+ *   The JavaScript code to be injected.
+ */
+function account_analytics_event($arg) {
+  // Initialize the script with the dataLayer declaration.
+  $script = 'var dataLayer = window.dataLayer || [];';
+  
+  // Prepare the data to be pushed to the dataLayer.
+  $data = [
+    'event' => 'e_form_submit',
+    'form_type' => $arg,
+  ];
+  
+  // Append the necessary dataLayer pushes to the script.
+  $script .= 'dataLayer.push({ ecommerce: null });';  
+  $script .= 'dataLayer.push(' . drupal_json_encode($data) . ');';
+  
+  // Return the complete script.
+  return $script;
+}
