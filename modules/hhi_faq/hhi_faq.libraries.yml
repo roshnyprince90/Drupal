@@ -1,0 +1,8 @@
+faq:
+  js:
+    js/hhi_faq.js: {}
+  dependencies:
+  - core/jquery
+  - core/drupal
+  - core/drupalSettings
+  - core/jquery.once
