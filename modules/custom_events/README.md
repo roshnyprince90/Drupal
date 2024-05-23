@@ -18,8 +18,11 @@ Dependencies:
 ## Installation
 
 Ensure that your Drupal site meets the core version requirements (^8 || ^9).
+
 Download and enable the date_recur module if it is not already installed.
+
 Download the Custom Events module and place it in the modules/custom/custom_events directory of your Drupal installation.
+
 Enable the Custom Events module through the Drupal admin interface or using Drush
 
 
