@@ -1,0 +1,9 @@
+services:
+  hhi_faq.service:
+    class: Drupal\hhi_faq\FaqService
+    arguments: ['@config.factory', '@module_handler', '@language_manager', '@entity.repository']
+  hhi_faq.twig.extension:
+    class: Drupal\hhi_faq\TwigExtension\FaqTwigExtension
+    arguments: ['@entity_type.manager']
+    tags:
+      - { name: twig.extension }
