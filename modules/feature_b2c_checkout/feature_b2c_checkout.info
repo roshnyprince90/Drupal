@@ -1,0 +1,5 @@
+name = Feature B2C Checkout
+description = Injects analytics event JavaScript on the billing page of the checkout process.
+core = 7.x
+package = Custom
+version = 7.x-1.0
