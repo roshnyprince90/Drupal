@@ -1,0 +1,139 @@
+<?php
+
+/**
+ * @file
+ * Contains hhi_faq.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\node\Entity\Node;
+
+/**
+ * Implements hook_help().
+ */
+function hhi_faq_help($route_name, RouteMatchInterface $route_match) {
+
+  switch ($route_name) {
+    case 'help.page.hhi_faq':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('HHI FAQ') . '</p>';
+      return $output;
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function hhi_faq_theme() {
+
+  $theme = [];
+
+  $theme['hhi_faq'] = [
+    'variables' => [
+      'id' => NULL,
+      'question' => NULL,
+      'answer' => NULL,
+    ],
+  ];
+
+  $theme['hhi_faq_schema'] = [
+    'variables' => [
+      'schema' => NULL,
+    ],
+  ];
+
+  $theme['hhi_faq_search_results'] = [
+    'variables' => [
+      'total' => NULL,
+      'results' => NULL,
+      'pager' => NULL,
+      'categories' => NULL,
+      'show_categories' => NULL,
+    ],
+  ];
+
+  $theme['hhi_faq_search_results_page'] = [
+    'variables' => [
+      'results' => NULL,
+      'page' => NULL,
+    ],
+  ];
+
+  $theme['hhi_faq_search_pager'] = [
+    'variables' => [
+      'total_pages' => NULL,
+      'page' => NULL,
+      'limit' => NULL,
+      'btn_label' => NULL,
+    ],
+  ];
+
+  $theme['hhi_faq_categories'] = [
+    'variables' => [
+      'categories' => NULL,
+      'active_category' => NULL,
+    ],
+  ];
+
+  return $theme;
+}
+
+/**
+ * Implements template_preprocess_paragraph().
+ *
+ * @param $variables
+ */
+function hhi_faq_preprocess_paragraph__faqs(&$variables) {
+
+  /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
+  $paragraph = $variables['elements']['#paragraph'];
+  $faqs = [];
+
+  if ($paragraph && $paragraph->hasField('field_faqs') && !$paragraph->get('field_faqs')
+      ->isEmpty()) {
+    $faq_nodes = $paragraph->get('field_faqs')->getValue();
+    foreach ($faq_nodes AS $faq) {
+      if (!empty($faq['target_id'])) {
+        if ($faq_node = Node::load($faq['target_id'])) {
+          $faqs[$faq_node->id()] = $faq_node;
+        }
+      }
+    }
+
+    $json = [
+      "@context" => "https://schema.org",
+      "@type" => "FAQPage",
+      "mainEntity" => [],
+    ];
+    foreach ($faqs AS $faq_node) {
+      /** @var \Drupal\Node\NodeInterface $faq_node */
+      $question = $faq_node->get('field_faq_question')->value;
+      $answer = str_replace([
+        "\r",
+        "\n",
+        "\t",
+      ], '', strip_tags($faq_node->get('body')->value));
+      $json['mainEntity'][] = [
+        "@type" => "Question",
+        "name" => $question,
+        "acceptedAnswer" => [
+          "@type" => "Answer",
+          "text" => $answer,
+        ],
+      ];
+    }
+
+    $tag = [
+      '#type' => 'html_tag',
+      '#tag' => 'script',
+      '#attributes' => [
+        'type' => 'application/ld+json',
+      ],
+      '#value' => json_encode($json),
+    ];
+
+    $variables['#attached']['html_head'][] = [$tag, 'structured_data_json'];
+  }
+}
