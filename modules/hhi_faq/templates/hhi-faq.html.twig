@@ -1,0 +1,16 @@
+{#
+/**
+ * @file hhi-faq.html.twig
+
+ * Custom theme implementation of FAQ question/answer item.
+ *
+ * Available variables:
+ * - id: Unique FAQ id.
+ * - question: FAQ question.
+ * - answer: FAQ answer.
+ */
+#}
+<div class="c-faq" data-faq-id="{{ id }}">
+    <div class="c-faq__question"><a href="#" class="c-faq__question-toggle">{{ question|raw }}</a></div>
+    <div class="c-faq__answer">{{ answer|raw }}</div>
+</div>

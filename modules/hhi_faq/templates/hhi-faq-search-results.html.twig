@@ -1,0 +1,31 @@
+{#
+/**
+ * @file hhi-faq-search-results.html.twig
+
+ * Custom theme implementation of FAQ search results.
+ *
+ * Available variables:
+ * - total: Total results.
+ * - results: Array of faq items.
+ * - pager: Pager button.
+ * - categories: Array of faq categories.
+ * - show_categories: Show categories flag.
+ */
+#}
+<div class="c-faq__search-results-container container container--md">
+    <div class="c-faq__search-results">
+        <h3><span class="c-faq__search-results-title">{{ 'Your Search identified'|t }}</span> <span class="c-faq__search-results-total">{{ total }}</span> {{ 'potential answers'|t }}</h3>
+        <div class="c-faq__search-results-wrapper c-faq__search-results-ajax">
+            {{ results }}
+        </div>
+        {{ pager }}
+    </div>
+    {% if show_categories %}
+        <div class="c-faq__categories">
+            <h4>{{ 'FAQ Categories'|t }}</h4>
+            <div class="c-faq__categories-wrapper">
+                {{ categories }}
+            </div>
+        </div>
+    {% endif %}
+</div>

@@ -1,0 +1,14 @@
+{#
+/**
+ * @file hhi-faq-search-pager.html.twig
+ *
+ * Variables:
+ * page: Current page
+ * limit: Results per page.
+ * total_pages: Total pages.
+ * btn_label: Load more button label.
+ */
+#}
+<button class="c-faq__search-load-more c-btn {% if page > total_pages or total_pages == 0 %} in-active{% endif %}" data-page="{{ page }}" data-limit="{{ limit }}" data-total-pages="{{ total_pages }}">
+    {{ btn_label|t }}
+</button>

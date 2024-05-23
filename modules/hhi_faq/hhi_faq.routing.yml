@@ -1,0 +1,24 @@
+hhi_faq.load_more_faqs:
+  path: '/ajax/faqs/{page}/{limit}'
+  defaults:
+    _controller: '\Drupal\hhi_faq\Controller\FaqController::loadMoreFaqs'
+    _title: 'Faqs'
+    page: ''
+    limit: ''
+  requirements:
+    _custom_access: '\Drupal\hhi_faq\Controller\FaqController::access'
+  options:
+    no_cache: TRUE
+
+hhi_faq.load_faqs_by_category:
+  path: '/ajax/faqs/{page}/{limit}/{category}'
+  defaults:
+    _controller: '\Drupal\hhi_faq\Controller\FaqController::loadFaqsByCategory'
+    _title: 'Faqs'
+    page: ''
+    limit: ''
+    category: ''
+  requirements:
+    _custom_access: '\Drupal\hhi_faq\Controller\FaqController::access'
+  options:
+    no_cache: TRUE

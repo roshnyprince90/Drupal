@@ -1,0 +1,17 @@
+{#
+/**
+ * @file hhi-faq-categories.html.twig
+
+ * Custom theme implementation of FAQ categories.
+ *
+ * Available variables:
+ * - categories: Array of taxonomy terms.
+ * - active_category: Id of active category.
+ */
+#}
+{% if categories %}
+    <a href="#" class="c-faq-search__category c-faq-search__all-categories{% if active_category == 0 %} is-active{% endif %}" data-tid="0">{{ 'All Categories'|t }}</a>
+    {% for id, category in categories if key|first != '#' %}
+        <a href="#" class="c-faq-search__category{% if active_category == id %} is-active{% endif %}" data-tid="{{ id }}">{{ category }}</a>
+    {% endfor %}
+{% endif %}
