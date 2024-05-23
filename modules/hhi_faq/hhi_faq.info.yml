@@ -1,0 +1,5 @@
+name: 'HHI - FAQ'
+type: module
+description: 'Custom FAQ functionality on site.'
+core: 8.x
+package: 'Custom'
